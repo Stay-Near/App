@@ -34,41 +34,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
-        android:layout_marginEnd="3dp"
         android:ems="10"
         android:hint="Correo electrónico"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/edtTelefono"
+        app:layout_constraintStart_toStartOf="@+id/edtTelefono"
         app:layout_constraintTop_toBottomOf="@+id/edtTelefono" />
-
-    <EditText
-        android:id="@+id/edtContra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="27dp"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/edtCorreo"
-        app:layout_constraintTop_toBottomOf="@+id/edtCorreo" />
-
-    <EditText
-        android:id="@+id/edtRepContra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:ems="10"
-        android:hint="Repita la contraseña"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/edtContra"
-        app:layout_constraintTop_toBottomOf="@+id/edtContra" />
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="33dp"
         android:text="Acepto los términos y condiciones"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,4 +60,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="42dp"
+        android:onClick="changeToLoginActivity"
+        android:text="regresar"
+        app:layout_constraintStart_toStartOf="@+id/btnRegister"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+    <EditText
+        android:id="@+id/edtContra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/edtCorreo"
+        app:layout_constraintTop_toBottomOf="@+id/edtCorreo" />
+
+    <EditText
+        android:id="@+id/edtRepContra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Repita la contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/edtContra"
+        app:layout_constraintTop_toBottomOf="@+id/edtContra" />
 </androidx.constraintlayout.widget.ConstraintLayout>
