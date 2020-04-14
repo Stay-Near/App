@@ -1,90 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registro"
-    tools:layout_editor_absoluteY="81dp">
+    tools:context=".Register">
 
     <EditText
         android:id="@+id/edtNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="66dp"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint=" Nombre completo"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edtCorreo"
+        android:id="@+id/edtTelefono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="21dp"
         android:ems="10"
-        android:hint="Correo electrónico"
+        android:hint="Teléfono (10 dígitos)"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/edtNombre"
         app:layout_constraintTop_toBottomOf="@+id/edtNombre" />
 
     <EditText
+        android:id="@+id/edtCorreo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="3dp"
+        android:ems="10"
+        android:hint="Correo electrónico"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edtTelefono"
+        app:layout_constraintTop_toBottomOf="@+id/edtTelefono" />
+
+    <EditText
         android:id="@+id/edtContra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="27dp"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/edtRepContra"
-        app:layout_constraintStart_toStartOf="@+id/edtTelefono"
-        app:layout_constraintTop_toBottomOf="@+id/edtTelefono" />
+        app:layout_constraintStart_toStartOf="@+id/edtCorreo"
+        app:layout_constraintTop_toBottomOf="@+id/edtCorreo" />
 
     <EditText
         android:id="@+id/edtRepContra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginTop="22dp"
         android:ems="10"
-        android:hint="Contraseña de nuevo"
+        android:hint="Repita la contraseña"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/chbxTerminos"
-        app:layout_constraintStart_toStartOf="@+id/chbxTerminos" />
-
-    <EditText
-        android:id="@+id/edtTelefono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Teléfono (10 Dígitos)"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/edtCorreo"
-        app:layout_constraintTop_toBottomOf="@+id/edtCorreo" />
+        app:layout_constraintStart_toStartOf="@+id/edtContra"
+        app:layout_constraintTop_toBottomOf="@+id/edtContra" />
 
     <CheckBox
-        android:id="@+id/chbxTerminos"
+        android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="34dp"
         android:text="Acepto los términos y condiciones"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegistro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtRepContra" />
 
     <Button
-        android:id="@+id/btnRegistro"
+        android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="66dp"
-        android:onClick="guardarEnPrefs"
+        android:layout_marginTop="33dp"
+        android:onClick="saveUserInFirebase"
         android:text="Registrarse"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</android.support.constraint.ConstraintLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+</androidx.constraintlayout.widget.ConstraintLayout>

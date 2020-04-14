@@ -1,4 +1,4 @@
-package com.example.hecto.proyecto;
+package com.example.staynear;
 
 import org.junit.Test;
 
