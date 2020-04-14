@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 
 public class Login extends AppCompatActivity {
 
@@ -59,10 +62,24 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.wtf("error", task.isSuccessful() + "");
-                if (!task.isSuccessful()) {
-                    Toast.makeText(Login.this, "Error !"
-                            + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                //Log.wtf("error", task.getException() + "");
+                if (task.isSuccessful()) {
+                    Toast.makeText(Login.this, "Error !", Toast.LENGTH_SHORT).show();
+                    try {
+                        throw task.getException();
+                    }
+                    catch (FirebaseAuthInvalidCredentialsException e) {
+                        Toast.makeText(getApplicationContext(), "Invalid Password", Toast.LENGTH_LONG).show();
+                    }
+                    catch (FirebaseAuthEmailException e){
+                        Toast.makeText(getApplicationContext(), "Invalid Email", Toast.LENGTH_LONG).show();
+                    }
+                    catch (FirebaseAuthException e){
+                        Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 else {
                     Toast.makeText(Login.this, "Logged in successfully",
