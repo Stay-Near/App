@@ -30,10 +30,15 @@ public class Profile extends AppCompatActivity {
         mail = findViewById(R.id.mail);
         telefono = findViewById(R.id.numero);
 
-        name.setText(user.getDisplayName());
-        matricula.setText(user.getUid());
-        mail.setText(user.getEmail());
-        telefono.setText(user.getPhoneNumber());
+        String nombre = user.getDisplayName();
+        String id = user.getUid();
+        String correo = user.getEmail();
+        String numero = user.getPhoneNumber();
+        
+        name.setText(nombre);
+        matricula.setText(id);
+        mail.setText(correo);
+        telefono.setText(numero);
 
     }
 
