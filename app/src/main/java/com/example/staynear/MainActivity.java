@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        new Handler().postDelayed(new Runnable(){
+        /*new Handler().postDelayed(new Runnable(){
             public void run(){
                 Intent intent = new Intent(MainActivity.this, Login.class);
                 startActivity(intent);
                 finish();
             };
-        }, DURATION_SPLASH);
+        }, DURATION_SPLASH);*/
     }
     public void changeToRegisterActivity(View v){
         Intent change=new Intent(this,Register.class);
