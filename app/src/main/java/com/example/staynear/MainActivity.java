@@ -17,4 +17,9 @@ public class MainActivity extends AppCompatActivity {
         Intent change=new Intent(this,Register.class);
         startActivityForResult(change,1);
     }
+
+    public void changeToUploadRoomActivity(View v){
+        Intent intent = new Intent(this,uploadRoom.class);
+        startActivity(intent);
+    }
 }
