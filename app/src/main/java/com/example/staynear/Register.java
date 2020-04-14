@@ -3,6 +3,7 @@ package com.example.staynear;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,8 +27,6 @@ public class Register extends AppCompatActivity {
     DatabaseReference databaseReference;
 
     private EditText nombre, telefono, correo, contra, repcontra;
-    private Button btnRegistro;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +39,7 @@ public class Register extends AppCompatActivity {
         repcontra = findViewById(R.id.edtRepContra);
         inicializarFirebase();
     }
+
     private void inicializarFirebase(){
         FirebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -56,6 +56,11 @@ public class Register extends AppCompatActivity {
             Log.d("d", e.getMessage());
             Toast.makeText(this,"No se ha podido agregar el usuario", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void changeToLoginActivity(View v){
+        Intent change = new Intent(this, Login.class);
+        startActivityForResult(change,1);
     }
 
 }
