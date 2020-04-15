@@ -33,12 +33,27 @@ public class MainActivity extends AppCompatActivity {
         }, DURATION_SPLASH);*/
     }
     public void changeToRegisterActivity(View v){
-        Intent change=new Intent(this,Register.class);
+        Intent change = new Intent(this, Register.class);
+        startActivityForResult(change,1);
+    }
+
+    public void changeToLoginActivity(View v){
+        Intent change = new Intent(this, Login.class);
+        startActivityForResult(change,1);
+    }
+
+    public void changeToProfileActivity(View v){
+        Intent change = new Intent(this, Profile.class);
+        startActivityForResult(change,1);
+    }
+
+    public void changeToImgActivity(View v){
+        Intent change = new Intent(this, UploadImage.class);
         startActivityForResult(change,1);
     }
 
     public void changeToUploadRoomActivity(View v){
-        Intent intent = new Intent(this,uploadRoom.class);
+        Intent intent = new Intent(this, uploadRoom.class);
         startActivity(intent);
     }
 
