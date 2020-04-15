@@ -1,6 +1,15 @@
 package com.example.staynear.model;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -30,14 +39,13 @@ public class RoomsListAdapter {
      * @param resource
      * @param objects
      */
-    public PersonListAdapter(Context context, int resource, ArrayList<Room> objects) {
-        super(context, resource, objects);
+    public RoomsListAdapter(Context context, int resource, ArrayList<Room> objects) {
+        //super(context, resource, objects);
         mContext = context;
         mResource = resource;
     }
 
     @NonNull
-    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         //sets up the image loader library
@@ -87,7 +95,7 @@ public class RoomsListAdapter {
         //create the imageloader object
         ImageLoader imageLoader = ImageLoader.getInstance();
         ;
-        int defaultImage = mContext.getResources().getIdentifier("@drawable/image_failed",null,mContext.getPackageName());
+        int defaultImage = mContext.getResources().getIdentifier("@drawable/logo_size",null,mContext.getPackageName());
 
         //create display options
         DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true)
@@ -121,7 +129,4 @@ public class RoomsListAdapter {
         ImageLoader.getInstance().init(config);
         // END - UNIVERSAL IMAGE LOADER SETUP
     }
-}
-
-
 }

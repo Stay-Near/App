@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class RoomsList extends AppCompatActivity {
-
+    // https://www.youtube.com/watch?v=cKUxiqNB5y0
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
