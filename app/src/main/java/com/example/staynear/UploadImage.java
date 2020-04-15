@@ -3,7 +3,6 @@ package com.example.staynear;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,7 +34,7 @@ public class UploadImage extends AppCompatActivity {
 
         firebaseStorage = FirebaseStorage.getInstance().getReference();
 
-        uploadButton = findViewById(R.id.btnUploadImage);
+        uploadButton = findViewById(R.id.btnUploadImageForRoom);
         downloadButton = findViewById(R.id.btnDownloadImage);
 
     }
