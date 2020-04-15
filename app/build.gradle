@@ -39,4 +39,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.3.0'
     implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.google.firebase:firebase-firestore:21.4.2'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }

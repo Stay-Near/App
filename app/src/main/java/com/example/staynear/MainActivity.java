@@ -62,4 +62,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void changeToRoomsListActivity(View v){
+        Intent intent = new Intent(this,RoomsList.class);
+        startActivity(intent);
+    }
 }

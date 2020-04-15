@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DescriptionRomm"></activity>
+        <activity android:name=".RoomsList" />
+        <activity android:name=".DescriptionRomm" />
         <activity android:name=".uploadRoom" />
         <activity android:name=".Profile" />
         <activity android:name=".Login" />
