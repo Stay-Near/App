@@ -33,19 +33,6 @@
         app:layout_constraintEnd_toEndOf="@+id/tPrice"
         app:layout_constraintTop_toBottomOf="@+id/tPrice" />
 
-    <EditText
-        android:id="@+id/tImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:ems="10"
-        android:hint="Image"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/bUpload"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tDescription" />
-
     <Button
         android:id="@+id/bUpload"
         android:layout_width="wrap_content"
@@ -56,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tImage" />
+        app:layout_constraintTop_toBottomOf="@+id/btnUploadImageForRoom" />
 
     <EditText
         android:id="@+id/tPrice"
@@ -75,14 +62,26 @@
         android:id="@+id/tDescription"
         android:layout_width="207dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="22dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Description"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/tImage"
+        app:layout_constraintBottom_toTopOf="@+id/btnUploadImageForRoom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tLocation" />
+
+    <Button
+        android:id="@+id/btnUploadImageForRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="23dp"
+        android:onClick="selectImage"
+        android:text="Seleccionar imagen"
+        app:layout_constraintBottom_toTopOf="@+id/bUpload"
+        app:layout_constraintStart_toStartOf="@+id/tDescription"
+        app:layout_constraintTop_toBottomOf="@+id/tDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

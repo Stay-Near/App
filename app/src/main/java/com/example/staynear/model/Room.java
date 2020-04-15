@@ -3,7 +3,7 @@ package com.example.staynear.model;
 public class Room {
     private String id;
     private String title;
-    private Integer price;
+    private Float price;
     private String location;
     private String description;
     private String owner;
@@ -13,7 +13,7 @@ public class Room {
 
     }
 
-    public Room(String id, String title, Integer price, String location, String description, String owner, String photo) {
+    public Room(String id, String title, Float price, String location, String description, String owner, String photo) {
         this.id = id;
         this.title = title;
         this.price = price;
@@ -47,11 +47,11 @@ public class Room {
         this.title = title;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

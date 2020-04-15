@@ -7,7 +7,7 @@
     tools:context=".UploadImage">
 
     <Button
-        android:id="@+id/btnUploadImage"
+        android:id="@+id/btnUploadImageForRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="162dp"
         android:layout_marginBottom="164dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnUploadImage"
+        app:layout_constraintBottom_toBottomOf="@+id/btnUploadImageForRoom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnDownloadImage"
