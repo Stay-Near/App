@@ -57,4 +57,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void changeToDesRoomActivity(View v){
+        Intent intent = new Intent(this, DescriptionRomm.class);
+        startActivity(intent);
+    }
+
 }
