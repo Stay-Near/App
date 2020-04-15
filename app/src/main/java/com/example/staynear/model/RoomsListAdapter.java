@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.staynear.R;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -20,16 +22,16 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.util.ArrayList;
 
-public class RoomsListAdapter {
+public class RoomsListAdapter extends ArrayAdapter<Room> {
     private static final String TAG = "RoomsListAdapter";
     private Context mContext;
     private int mResource;
     private int lastPosition = -1;
 
     private static class ViewHolder {
-        TextView name;
-        TextView birthday;
-        TextView sex;
+        TextView title;
+        TextView location;
+        TextView price;
         ImageView image;
     }
 
@@ -40,10 +42,11 @@ public class RoomsListAdapter {
      * @param objects
      */
     public RoomsListAdapter(Context context, int resource, ArrayList<Room> objects) {
-        //super(context, resource, objects);
+        super(context, resource, objects);
         mContext = context;
         mResource = resource;
     }
+
 
     @NonNull
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -52,10 +55,10 @@ public class RoomsListAdapter {
         setupImageLoader();
 
         //get the persons information
-        String name = getItem(position).getName();
-        String birthday = getItem(position).getBirthday();
-        String sex = getItem(position).getSex();
-        String imgUrl = getItem(position).getImgURL();
+        String title = getItem(position).getTitle();
+        String location = getItem(position).getLocation();
+        String price = "$"+getItem(position).getPrice();
+        String imgUrl = getItem(position).getPhoto();
 
         //create the view result for showing the animation
         final View result;
@@ -68,10 +71,10 @@ public class RoomsListAdapter {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder= new ViewHolder();
-            holder.name = (TextView) convertView.findViewById(R.id.textView1);
-            holder.birthday = (TextView) convertView.findViewById(R.id.textView2);
-            holder.sex = (TextView) convertView.findViewById(R.id.textView3);
-            holder.image = (ImageView) convertView.findViewById(R.id.image);
+            holder.title = convertView.findViewById(R.id.textView1);
+            holder.location = convertView.findViewById(R.id.textView2);
+            holder.price = convertView.findViewById(R.id.textView3);
+            holder.image = convertView.findViewById(R.id.image);
 
             result = convertView;
 
@@ -83,14 +86,14 @@ public class RoomsListAdapter {
         }
 
 
-        Animation animation = AnimationUtils.loadAnimation(mContext,
-                (position > lastPosition) ? R.anim.load_down_anim : R.anim.load_up_anim);
-        result.startAnimation(animation);
+       // Animation animation = AnimationUtils.loadAnimation(mContext,
+        //        (position > lastPosition) ? R.anim.load_down_anim : R.anim.load_up_anim);
+        //result.startAnimation(animation);
         lastPosition = position;
 
-        holder.name.setText(name);
-        holder.birthday.setText(birthday);
-        holder.sex.setText(sex);
+        holder.title.setText(title);
+        holder.location.setText(location);
+        holder.price.setText(price);
 
         //create the imageloader object
         ImageLoader imageLoader = ImageLoader.getInstance();

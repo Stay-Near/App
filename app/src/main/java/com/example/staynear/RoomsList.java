@@ -18,11 +18,11 @@ public class RoomsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rooms_list);
 
-        ListView lv = (ListView) findViewById(R.id.listView);
+        ListView lv = findViewById(R.id.listView);
 
-        Room first = new Room(UUID.randomUUID().toString(),"Casa chida",30.0f,"GLD","1 baño","1","drawable://" + R.drawable.room1);
-        Room second = new Room(UUID.randomUUID().toString(),"Depa fresco",15.0f,"QRO","1 cama","2","drawable://" + R.drawable.room2);
-        Room third = new Room(UUID.randomUUID().toString(),"Caja de carton",10.0f,"CDMX","60x60","3","drawable://" + R.drawable.room3);
+        Room first = new Room(UUID.randomUUID().toString(),"Casa chida",30.00f,"GLD","1 baño","1","drawable://" + R.drawable.room1);
+        Room second = new Room(UUID.randomUUID().toString(),"Depa fresco",15.00f,"QRO","1 cama","2","drawable://" + R.drawable.room2);
+        Room third = new Room(UUID.randomUUID().toString(),"Caja de carton",10.00f,"CDMX","60x60","3","drawable://" + R.drawable.room3);
 
         ArrayList<Room> rooms = new ArrayList<>();
         rooms.add(first);
