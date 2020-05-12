@@ -78,8 +78,8 @@
         android:layout_marginTop="25dp"
         android:onClick="changeToRoomsListActivity"
         android:text="ListView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/desRoom"
+        app:layout_constraintStart_toStartOf="@+id/desRoom"
         app:layout_constraintTop_toBottomOf="@+id/desRoom" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

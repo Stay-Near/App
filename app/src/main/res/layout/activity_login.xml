@@ -4,39 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FBFBFB"
+    android:background="@drawable/grad_bg"
     tools:context=".Login">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="42dp"
-        app:layout_constraintStart_toStartOf="@+id/editText"
+        android:layout_width="237dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="45dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_size" />
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_width="216dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="34dp"
+        android:background="@drawable/text_bt_white"
         android:ems="10"
-        android:hint="Email:"
+        android:hint="  Email:"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
+        android:layout_width="217dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="45dp"
+        android:background="@drawable/text_bt_white"
         android:ems="10"
-        android:hint="Password:"
+        android:hint="  Password:"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintStart_toStartOf="@+id/editText"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
@@ -44,20 +54,26 @@
         android:id="@+id/registro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="138dp"
+        android:layout_marginBottom="137dp"
+        android:background="@drawable/et_gb"
         android:onClick="changeToRegisterActivity"
         android:text="Registro"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/login" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="42dp"
+        android:background="@drawable/et_gb"
         android:onClick="changeToMainMenuActivity"
         android:text="Entrar"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/registro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/registro"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

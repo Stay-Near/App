@@ -1,0 +1,11 @@
+<shape xmlns:xmins="http://schemas.android.com/apk/res/android"
+    xmins:shape="rectangle">
+    <corners
+        xmins:bottomLeftRadius="30dp"
+        xmins:bottomRightRadius="30dp"
+        xmins:topLeftRadius="0dp"
+        xmins:topRightRadius="30dp"/>
+    <stroke
+        xmins:width="1dp"
+        xmins:color="@color/white"/>
+</shape>

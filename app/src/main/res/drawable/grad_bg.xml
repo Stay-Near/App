@@ -1,0 +1,8 @@
+<shape xmlns:xmins="http://schemas.android.com/apk/res/android"
+    xmins:shape="rectangle">
+    <gradient
+        xmins:endColor="@color/colorPrimary"
+        xmins:angle="0"
+        xmins:type="linear"
+        xmins:startColor="@color/colorAccent" />
+</shape>
