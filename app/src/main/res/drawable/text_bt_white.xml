@@ -2,7 +2,7 @@
     xmins:shape="rectangle">
     <corners
         xmins:bottomLeftRadius="30dp"
-        xmins:bottomRightRadius="30dp"
+        xmins:bottomRightRadius="0dp"
         xmins:topLeftRadius="0dp"
         xmins:topRightRadius="30dp"/>
     <stroke

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="D1D1D1"
+    android:background="#D1D1D1"
     tools:context=".uploadRoom">
 
     <EditText
@@ -14,8 +14,9 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/text_bt"
         android:ems="10"
-        android:hint="  Title"
+        android:hint="Title"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         app:layout_constraintBottom_toTopOf="@+id/tPrice"
@@ -25,13 +26,14 @@
 
     <EditText
         android:id="@+id/tLocation"
-        android:layout_width="229dp"
-        android:layout_height="41dp"
+        android:layout_width="217dp"
+        android:layout_height="39dp"
         android:layout_marginBottom="55dp"
         android:background="@drawable/text_bt"
         android:ems="10"
-        android:hint="  Location"
+        android:hint="Location"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         app:layout_constraintBottom_toTopOf="@+id/tDescription"
@@ -54,13 +56,14 @@
 
     <EditText
         android:id="@+id/tPrice"
-        android:layout_width="231dp"
+        android:layout_width="218dp"
         android:layout_height="37dp"
         android:layout_marginBottom="19dp"
         android:background="@drawable/text_bt"
         android:ems="10"
-        android:hint="  Price"
+        android:hint="Price"
         android:inputType="numberDecimal"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         app:layout_constraintBottom_toTopOf="@+id/tLocation"

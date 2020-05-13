@@ -2,7 +2,9 @@ package com.example.staynear;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import com.example.staynear.model.Room;
@@ -29,7 +31,7 @@ public class RoomsList extends AppCompatActivity {
         rooms.add(second);
         rooms.add(third);
 
-        RoomsListAdapter adapter = new RoomsListAdapter(this,R.layout.adapter_view_layout,rooms);
+        RoomsListAdapter adapter = new RoomsListAdapter(this, R.layout.adapter_view_layout,rooms);
         lv.setAdapter(adapter);
     }
 }

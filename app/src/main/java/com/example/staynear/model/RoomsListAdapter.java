@@ -1,6 +1,7 @@
 package com.example.staynear.model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.staynear.DescriptionRomm;
+import com.example.staynear.MainActivity;
 import com.example.staynear.R;
+import com.example.staynear.RoomsList;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
