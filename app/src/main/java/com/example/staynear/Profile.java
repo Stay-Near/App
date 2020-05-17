@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity {
 
-    private TextView name, matricula, mail, telefono;
+    private TextView name, name2, matricula, matricula2, mail, telefono;
     private DatabaseReference reff;
     private FirebaseUser currentFirebaseUser;
 
@@ -28,7 +28,9 @@ public class Profile extends AppCompatActivity {
 
         name = findViewById(R.id.name);
         matricula = findViewById(R.id.matricula);
-        mail = findViewById(R.id.mail);
+        name2 = findViewById(R.id.name2);
+        matricula2 = findViewById(R.id.matricula2);
+        mail = findViewById(R.id.correo);
         telefono = findViewById(R.id.numero);
 
         reff = FirebaseDatabase.getInstance().getReference().child("user").child("53c65fcd-01a6-4085-a00b-d97c74de3501");
@@ -41,6 +43,8 @@ public class Profile extends AppCompatActivity {
 
                 name.setText(nombre);
                 matricula.setText("A00451398");
+                name2.setText(nombre);
+                matricula2.setText("A00451398");
                 mail.setText(correo);
                 telefono.setText(num);
             }
