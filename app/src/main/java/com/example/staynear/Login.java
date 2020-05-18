@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth fAuth;
     private EditText email, password;
 
     @Override
@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
         email = findViewById(R.id.editText);
         password = findViewById(R.id.editText2);
 
-        mAuth = FirebaseAuth.getInstance();
+        fAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -43,54 +43,36 @@ public class Login extends AppCompatActivity {
         startActivity(change);
     }
 
-    public void changeToMainMenuActivity(View v) {
+    public  void tryLogin(View v){
         String userEmail = email.getText().toString().trim();
         String userPassword = password.getText().toString().trim();
-
         if (TextUtils.isEmpty(userEmail)) {
             Toast.makeText(Login.this, "Email is required", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(userPassword)) {
             Toast.makeText(Login.this, "Password is required", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(userEmail) && TextUtils.isEmpty(userPassword)) {
-            Toast.makeText(Login.this, "Fields are empty", Toast.LENGTH_SHORT).show();
-        }
+        else {
+            fAuth.signInWithEmailAndPassword(userEmail,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(Login.this, "Welcome to StayNear", Toast.LENGTH_LONG).show();
+                        changeToMainMenuActivity();
+                    }else{
+                        Toast.makeText(Login.this, "Invalid email or password", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
-        // Authenticate the user
-        mAuth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(
-                new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    try {
-                        throw task.getException();
-                    }
-                    catch (FirebaseAuthInvalidCredentialsException e) {
-                        Toast.makeText(Login.this, "Invalid Password",
-                                Toast.LENGTH_LONG).show();
-                    }
-                    catch (FirebaseAuthEmailException e){
-                        Toast.makeText(Login.this, "Invalid Email",
-                                Toast.LENGTH_LONG).show();
-                    }
-                    catch (FirebaseAuthException e){
-                        Toast.makeText(Login.this, "Invalid Credentials",
-                                Toast.LENGTH_LONG).show();
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    Toast.makeText(Login.this, "Error !",
-                            Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(Login.this, "Logged in succesfully",
-                            Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Login.this, list_room.class);
-                    startActivity(intent);
-                }
-            }
-        });
+        }
+    }
+    public void changeToMainMenuActivity(View v) {
+        Intent intent = new Intent(Login.this, list_room.class);
+        startActivity(intent);
+    }
+    public void changeToMainMenuActivity() {
+        Intent intent = new Intent(Login.this, list_room.class);
+        startActivity(intent);
     }
 }

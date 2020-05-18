@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         }, SPLASH_SCREEN);
     }
 
-    /*public void changeToRegisterActivity(View v){
+    public void changeToRegisterActivity(View v){
         Intent change = new Intent(this, Register.class);
         startActivityForResult(change,1);
     }
@@ -80,5 +81,5 @@ public class MainActivity extends AppCompatActivity {
     public void changeToRoomsListActivity(View v){
         Intent intent = new Intent(this,RoomsList.class);
         startActivity(intent);
-    } */
+    }
 }

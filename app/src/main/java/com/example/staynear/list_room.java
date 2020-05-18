@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.example.staynear.model.Room;
 import com.example.staynear.model.RoomsListAdapter;
@@ -74,6 +77,11 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Toast.makeText(this, "Selecciono el item: " + menuItem.toString(), Toast.LENGTH_LONG).show();
+        if(menuItem.toString().equals("Maps")){
+            Intent mapsIntent = new Intent(this,Mapa.class);
+            startActivity(mapsIntent);
+        }
         return true;
     }
 }

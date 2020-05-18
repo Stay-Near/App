@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +13,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.staynear.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +30,7 @@ public class Register extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    FirebaseAuth fAuth;
 
     private EditText nombre, telefono, correo, contra, repcontra;
 
@@ -37,6 +43,7 @@ public class Register extends AppCompatActivity {
         correo = findViewById(R.id.edtCorreo);
         contra = findViewById(R.id.edtContra);
         repcontra = findViewById(R.id.edtRepContra);
+        fAuth = FirebaseAuth.getInstance();
         inicializarFirebase();
     }
 
@@ -49,16 +56,56 @@ public class Register extends AppCompatActivity {
 
     public void saveUserInFirebase(View v){
         try{
-            User newUser = new User(UUID.randomUUID().toString(), nombre.getText().toString(), telefono.getText().toString(), correo.getText().toString(), contra.getText().toString());
-            databaseReference.child("user").child(newUser.getId()).setValue(newUser);
-            Toast.makeText(this,"Su usuario ha sido registrado correctamente", Toast.LENGTH_LONG).show();
+            String userName = nombre.getText().toString().trim();
+            String userPhone = telefono.getText().toString().trim();
+            String userEmail = correo.getText().toString().trim();
+            String userPassword = contra.getText().toString().trim();
+            String userRePassword = repcontra.getText().toString().trim();
+
+            if (TextUtils.isEmpty(userEmail)) {
+                Toast.makeText(this, "Email is required", Toast.LENGTH_SHORT).show();
+            }
+            else if (TextUtils.isEmpty(userPassword)) {
+                Toast.makeText(this, "Password is required", Toast.LENGTH_SHORT).show();
+            }
+            else if (TextUtils.isEmpty(userName)) {
+                Toast.makeText(this, "Name is requied", Toast.LENGTH_SHORT).show();
+            }
+            else if (TextUtils.isEmpty(userPhone)) {
+                Toast.makeText(this, "Phone is requied", Toast.LENGTH_SHORT).show();
+            }
+            else if (TextUtils.isEmpty(userRePassword)) {
+                Toast.makeText(this, "Password is requied", Toast.LENGTH_SHORT).show();
+            }
+            else if (!TextUtils.equals(userPassword,userRePassword)) {
+                Toast.makeText(this, "Passwords must be the same", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                fAuth.createUserWithEmailAndPassword(userEmail,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(Register.this, "User created successfully", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+                User newUser = new User(UUID.randomUUID().toString(), nombre.getText().toString(), telefono.getText().toString(), correo.getText().toString(), contra.getText().toString());
+                databaseReference.child("user").child(newUser.getId()).setValue(newUser);
+                Toast.makeText(this,"Su usuario ha sido registrado correctamente", Toast.LENGTH_LONG).show();
+                changeToLoginActivity();
+            }
         } catch(Exception e){
-            Log.d("d", e.getMessage());
             Toast.makeText(this,"No se ha podido agregar el usuario", Toast.LENGTH_LONG).show();
         }
     }
 
     public void changeToLoginActivity(View v){
+        Intent change = new Intent(this, Login.class);
+        startActivityForResult(change,1);
+    }
+    public void changeToLoginActivity(){
         Intent change = new Intent(this, Login.class);
         startActivityForResult(change,1);
     }
