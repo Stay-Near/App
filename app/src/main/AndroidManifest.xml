@@ -32,6 +32,7 @@
         <activity
             android:name=".Mapa"
             android:label="@string/title_activity_mapa"></activity>
+        <activity android:name=".Schedule"></activity>
         <activity android:name=".list_room" />
         <activity android:name=".RoomsList" />
         <activity android:name=".DescriptionRomm" />
