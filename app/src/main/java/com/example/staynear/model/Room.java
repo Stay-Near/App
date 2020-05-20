@@ -1,19 +1,23 @@
 package com.example.staynear.model;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class Room {
     private String id;
     private String title;
-    private Float price;
+    private double price;
     private String location;
     private String description;
     private String owner;
     private String photo;
+    private double lat;
+    private double lng;
 
     public Room() {
 
     }
 
-    public Room(String id, String title, Float price, String location, String description, String owner, String photo) {
+    public Room(String id, String title, double price, String location, String description, String owner, String photo, double lat, double lng) {
         this.id = id;
         this.title = title;
         this.price = price;
@@ -21,6 +25,8 @@ public class Room {
         this.description = description;
         this.owner = owner;
         this.photo = photo;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public String getId() {
@@ -47,11 +53,11 @@ public class Room {
         this.title = title;
     }
 
-    public Float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -79,14 +85,35 @@ public class Room {
         this.owner = owner;
     }
 
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
     @Override
     public String toString() {
         return "Room{" +
-                "title='" + title + '\'' +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
                 ", price=" + price +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 ", owner='" + owner + '\'' +
+                ", photo='" + photo + '\'' +
+                ", lat=" + lat +
+                ", lng=" + lng +
                 '}';
     }
+
 }

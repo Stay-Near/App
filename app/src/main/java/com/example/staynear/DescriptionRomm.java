@@ -34,7 +34,7 @@ public class DescriptionRomm extends AppCompatActivity {
         owner = findViewById(R.id.contacto);
 
         reff = FirebaseDatabase.getInstance().getReference().child("room").
-                child("228ae052-6cab-4551-9116-acf9b423e860");
+                child(getIntent().getStringExtra("id"));
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
