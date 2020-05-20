@@ -83,13 +83,17 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
             startActivity(mapsIntent);
             return true;
         } else if (menuItem.toString().equals("Rooms")) {
-            Intent roomsIntent = new Intent(this, DescriptionRomm.class);
-            roomsIntent.putExtra("id","228ae052-6cab-4551-9116-acf9b423e860");
+            Intent roomsIntent = new Intent(this, RoomsList.class);
+            //roomsIntent.putExtra("id","228ae052-6cab-4551-9116-acf9b423e860");
             startActivity(roomsIntent);
             return true;
         } else if (menuItem.toString().equals("Profile")) {
             Intent profileIntent = new Intent(this, Profile.class);
             startActivity(profileIntent);
+            return true;
+        }else if (menuItem.toString().equals("Settings")){
+            Intent settingsIntent = new Intent(this, uploadRoom.class);
+            startActivity(settingsIntent);
             return true;
         }
         return false;
