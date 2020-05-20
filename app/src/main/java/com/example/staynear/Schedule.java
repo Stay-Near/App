@@ -35,15 +35,10 @@ public class Schedule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-        //currentUser = ""+FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //Toast.makeText(this,currentUser,Toast.LENGTH_SHORT).show();
-
+        currentUser = ""+FirebaseAuth.getInstance().getCurrentUser().getUid();
         title = findViewById(R.id.tvTitle);
         calendar = findViewById(R.id.calendarView);
-
-       Intent intent = getIntent();
-       // Bundle extras = new Bundle();
-
+        Intent intent = getIntent();
         roomID = intent.getStringExtra("roomID");
         title.setText("Booking for " + intent.getStringExtra("roomTitle"));
 
@@ -59,7 +54,7 @@ public class Schedule extends AppCompatActivity {
 
     public void Book(View v){
         try{
-            Appointment newAppointment = new Appointment(UUID.randomUUID().toString(), roomID, "RichieTest", date);
+            Appointment newAppointment = new Appointment(UUID.randomUUID().toString(), roomID, currentUser, date);
             databaseReference.child("appointment").child(newAppointment.getId()).setValue(newAppointment);
             Toast.makeText(this,"Booked room for: " + date, Toast.LENGTH_SHORT).show();
             finish();
