@@ -81,13 +81,15 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
         if (menuItem.toString().equals("Maps")) {
             Intent mapsIntent = new Intent(this, Mapa.class);
             startActivity(mapsIntent);
-            if (menuItem.toString().equals("Rooms")) {
-                Intent roomsIntent = new Intent(this, DescriptionRomm.class);
-                startActivity(roomsIntent);
-            } else if (menuItem.toString().equals("Profile")) {
-                Intent profileIntent = new Intent(this, Profile.class);
-                startActivity(profileIntent);
-            }
+            return true;
+        } else if (menuItem.toString().equals("Rooms")) {
+            Intent roomsIntent = new Intent(this, DescriptionRomm.class);
+            roomsIntent.putExtra("id","228ae052-6cab-4551-9116-acf9b423e860");
+            startActivity(roomsIntent);
+            return true;
+        } else if (menuItem.toString().equals("Profile")) {
+            Intent profileIntent = new Intent(this, Profile.class);
+            startActivity(profileIntent);
             return true;
         }
         return false;
