@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.example.staynear.model.Room;
 import com.example.staynear.model.RoomsListAdapter;
@@ -30,7 +33,7 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_room);
 
-        ListView listView = findViewById(R.id.listView);
+        /*ListView listView = findViewById(R.id.listView);
 
         Room first = new Room(UUID.randomUUID().toString(),"Casa chida",30.00f,"GLD","1 baño","1","drawable://" + R.drawable.room1);
         Room second = new Room(UUID.randomUUID().toString(),"Depa fresco",15.00f,"QRO","1 cama","2","drawable://" + R.drawable.room2);
@@ -41,7 +44,7 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
         rooms.add(second);
         rooms.add(third);
 
-        RoomsListAdapter adapter = new RoomsListAdapter(this, R.layout.activity_rooms_list,rooms);
+        RoomsListAdapter adapter = new RoomsListAdapter(this, R.layout.activity_rooms_list,rooms);*/
         // falta solucionar problema list view
         //listView.setAdapter(adapter);
 
@@ -74,6 +77,15 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Toast.makeText(this, menuItem.toString(),Toast.LENGTH_SHORT).show();
+        if(menuItem.toString().equals("Rooms")) {
+            Intent roomsIntent = new Intent(this, DescriptionRomm.class);
+            startActivity(roomsIntent);
+        }
+        else if(menuItem.toString().equals("Profile")){
+            Intent profileIntent = new Intent(this, Profile.class);
+            startActivity(profileIntent);
+        }
         return true;
     }
 }

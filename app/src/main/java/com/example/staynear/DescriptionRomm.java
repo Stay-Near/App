@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 public class DescriptionRomm extends AppCompatActivity {
 
     private TextView title, description, location, price, owner;
+    private String id,titulo;
     private DatabaseReference reff;
     private FirebaseUser currentFirebaseUser;
 
@@ -33,12 +34,13 @@ public class DescriptionRomm extends AppCompatActivity {
         owner = findViewById(R.id.contacto);
 
         reff = FirebaseDatabase.getInstance().getReference().child("room").
-                child("11a22b92-e396-4536-b97a-5f705a6c11eb");
+                child("228ae052-6cab-4551-9116-acf9b423e860");
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String titulo = dataSnapshot.child("title").getValue().toString();
+                id = dataSnapshot.child("id").getValue().toString();
+                titulo = dataSnapshot.child("title").getValue().toString();
                 String des = dataSnapshot.child("description").getValue().toString();
                 String loc = dataSnapshot.child("location").getValue().toString();
                 String pre = dataSnapshot.child("price").getValue().toString();
@@ -55,5 +57,13 @@ public class DescriptionRomm extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
+    }
+
+    public void agendar(View v){
+        Intent intent = new Intent(this, Schedule.class);
+        intent.putExtra("roomID",id);
+        intent.putExtra("roomTitle",titulo);
+        startActivity(intent);
     }
 }
