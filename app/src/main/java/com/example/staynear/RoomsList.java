@@ -1,10 +1,12 @@
 package com.example.staynear;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,6 +30,7 @@ public class RoomsList extends AppCompatActivity {
     NavigationView navigationView;
     Toolbar toolbar;
     ArrayList<Room> rooms = new ArrayList<>();
+    private DatabaseReference roomsRef;
    // private DatabaseReference ref;
     // https://www.youtube.com/watch?v=cKUxiqNB5y0
     @Override
@@ -49,7 +52,7 @@ public class RoomsList extends AppCompatActivity {
         //Query query = FirebaseDatabase.getInstance().getReference().child("room").orderByKey();
         //query.once("value")
 
-        FirebaseDatabase.getInstance().getReference().child("room")
+        /*FirebaseDatabase.getInstance().getReference().child("room")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -71,7 +74,39 @@ public class RoomsList extends AppCompatActivity {
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
-                });
+                });*/
+
+        /*FirebaseDatabase.getInstance().getReference().child("room").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Room room = snapshot.getValue(Room.class);
+                    Log.e("Datos:",""+room);
+                    rooms.add(room);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
+
+        roomsRef= FirebaseDatabase.getInstance().getReference();
+        roomsRef.child("room").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Room cuarto = snapshot.getValue(Room.class);
+                    rooms.add(cuarto);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         RoomsListAdapter adapter = new RoomsListAdapter(this, R.layout.adapter_view_layout,rooms);
         lv.setAdapter(adapter);
     }
