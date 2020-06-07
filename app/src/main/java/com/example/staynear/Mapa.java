@@ -2,15 +2,22 @@ package com.example.staynear;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.staynear.model.Room;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,6 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -34,15 +42,42 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
 
     private GoogleMap mMap;
     private DatabaseReference roomsRef;
+    private FusedLocationProviderClient fusedLocationClient;
+    private Location myLoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        final SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkPermission();
+        }
+
+        this.fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                // Got last known location. In some rare situations this can be null.
+                if (location != null) {
+                    myLoc = location;
+                    mapFragment.getMapAsync(Mapa.this);
+                    //Toast.makeText(Mapa.this,"Latitude : " + location.getLatitude() + "Longitude: " + location.getLongitude(),Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(Mapa.this,"No sacó la localización la hija de la verga",Toast.LENGTH_LONG).show();
+                }
+            }
+        }).addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Mapa.this,"Latitude : " + e.getMessage(),Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
 
@@ -58,7 +93,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        final LatLng guadalajara = new LatLng(20.6737777,-103.4054536);
+        final LatLng mylatlng = new LatLng(myLoc.getLatitude(),myLoc.getLongitude());
         roomsRef= FirebaseDatabase.getInstance().getReference();
         roomsRef.child("room").addValueEventListener(new ValueEventListener() {
             @Override
@@ -74,7 +109,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
 
                 }
                 mMap.setOnMarkerClickListener(Mapa.this);
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(guadalajara,13));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mylatlng,13));
             }
 
             @Override
@@ -100,5 +135,16 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         startActivity(toDescription);
 
         return false;
+    }
+
+    public void checkPermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ){//Can add more as per requirement
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
+                    123);
+        }
     }
 }
