@@ -10,8 +10,8 @@
     <EditText
         android:id="@+id/tTitle"
         android:layout_width="221dp"
-        android:layout_height="39dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="19dp"
         android:background="@drawable/text_bt"
         android:ems="10"
         android:hint="Title"
@@ -27,8 +27,8 @@
     <EditText
         android:id="@+id/tLocation"
         android:layout_width="217dp"
-        android:layout_height="39dp"
-        android:layout_marginBottom="55dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="56dp"
         android:background="@drawable/text_bt"
         android:ems="10"
         android:hint="Location"
@@ -44,20 +44,20 @@
     <Button
         android:id="@+id/bUpload"
         android:layout_width="87dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="69dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/et_gb_black"
-        android:onClick="saveRoomInFirebase"
-        android:text="Upload"
+        android:onClick="tempUpload"
+        android:text="Temp Upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnUploadImageForRoom" />
+        app:layout_constraintTop_toBottomOf="@+id/bUpload4" />
 
     <EditText
         android:id="@+id/tPrice"
         android:layout_width="218dp"
-        android:layout_height="37dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="19dp"
         android:background="@drawable/text_bt"
         android:ems="10"
@@ -75,7 +75,7 @@
         android:id="@+id/tDescription"
         android:layout_width="207dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="19dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="  Description"
@@ -90,12 +90,12 @@
     <Button
         android:id="@+id/btnUploadImageForRoom"
         android:layout_width="173dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="21dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="11dp"
         android:background="@drawable/et_gb_black"
         android:onClick="selectImage"
         android:text="Seleccionar imagen"
-        app:layout_constraintBottom_toTopOf="@+id/bUpload"
+        app:layout_constraintBottom_toTopOf="@+id/bUpload4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tDescription" />
@@ -113,5 +113,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bUpload4"
+        android:layout_width="87dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/et_gb_black"
+        android:onClick="saveRoomInFirebase"
+        android:text="Upload"
+        app:layout_constraintBottom_toTopOf="@+id/bUpload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUploadImageForRoom" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

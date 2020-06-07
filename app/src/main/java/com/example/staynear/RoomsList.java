@@ -40,7 +40,7 @@ public class RoomsList extends AppCompatActivity {
 
         ListView lv = findViewById(R.id.listView);
 
-       Room first = new Room(UUID.randomUUID().toString(),"Casa chida",30.00f,"GLD","1 baño","1","drawable://" + R.drawable.room1,0.5f,0.5f);
+       Room first = new Room(UUID.randomUUID().toString(),"Casa chida",30.00,"GLD","1 baño","1","drawable://" + R.drawable.room1,0.5f,0.5f);
         Log.e("Añadido: ", first.toString());
        // Room second = new Room(UUID.randomUUID().toString(),"Depa fresco",15.00f,"QRO","1 cama","2","drawable://" + R.drawable.room2,0.5f,0.5f);
        // Room third = new Room(UUID.randomUUID().toString(),"Caja de carton",10.00f,"CDMX","60x60","3","drawable://" + R.drawable.room3,0.5f,0.5f);
@@ -99,7 +99,8 @@ public class RoomsList extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Room cuarto = snapshot.getValue(Room.class);
-                    cuarto.setPhoto("drawable://" + R.drawable.room1);
+                    cuarto.setPrice(cuarto.getPrice());
+                    //cuarto.setPhoto("drawable://" + R.drawable.room1);
                     Log.e("Cuarto obtenido: ", cuarto.toString());
                     rooms.add(cuarto);
                 }

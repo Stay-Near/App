@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -32,6 +33,8 @@ public class uploadRoom extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+    private String userID;
 
     private StorageReference firebaseStorage;
     private static final int GALLERY_SUCCESS = 1;
@@ -49,6 +52,7 @@ public class uploadRoom extends AppCompatActivity {
         location = findViewById(R.id.tLocation);
         description = findViewById(R.id.tDescription);
         btnUploadImage = findViewById(R.id.btnUploadImageForRoom);
+        userID = ""+ FirebaseAuth.getInstance().getCurrentUser().getUid();
         inicializarFirebase();
     }
 
@@ -92,7 +96,7 @@ public class uploadRoom extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
                         Toast.makeText(uploadRoom.this,"Su cuarto ha sido registrado exitosamente", Toast.LENGTH_LONG).show();
-                        Room newUser = new Room(UUID.randomUUID().toString(), title.getText().toString(), Float.parseFloat(price.getText().toString()), location.getText().toString(), description.getText().toString(),"d9c654a7-a0e9-4bb2-b3cc-a2e2c1bcfe13",downloadUri.toString(),0.5f,0.5f);
+                        Room newUser = new Room(UUID.randomUUID().toString(), title.getText().toString(), Double.parseDouble(price.getText().toString()), location.getText().toString(), description.getText().toString(),"d9c654a7-a0e9-4bb2-b3cc-a2e2c1bcfe13",downloadUri.toString(),0.5f,0.5f);
                         databaseReference.child("room").child(newUser.getId()).setValue(newUser);
                         Toast.makeText(uploadRoom.this,"Su cuarto ha sido registrado correctamente", Toast.LENGTH_LONG).show();
                     } else {
@@ -107,5 +111,11 @@ public class uploadRoom extends AppCompatActivity {
             Log.d("d", e.getMessage());
             Toast.makeText(this,"No se ha podido agregar el cuarto", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void tempUpload(View v){
+        String tempPhoto = "https://firebasestorage.googleapis.com/v0/b/staynear-88b6a.appspot.com/o/roomPhotos%2F1315115215?alt=media&token=518ee16e-053f-4546-85cf-21f9d96fd1dd";
+        Room room = new Room(UUID.randomUUID().toString(),title.getText().toString(),Double.parseDouble(price.getText().toString()),location.getText().toString(),description.getText().toString(), userID,tempPhoto,0.5f,0.5f);
+        databaseReference.child("room").child(room.getId()).setValue(room);
     }
 }
