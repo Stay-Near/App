@@ -3,7 +3,9 @@ package com.example.staynear;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -48,6 +50,9 @@ public class Register extends AppCompatActivity {
         repcontra = findViewById(R.id.edtRepContra);
         fAuth = FirebaseAuth.getInstance();
         inicializarFirebase();
+
+
+
     }
 
     private void inicializarFirebase(){
