@@ -10,13 +10,24 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.staynear.model.Room;
 import com.example.staynear.model.RoomsListAdapter;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -25,13 +36,20 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
     // Variables
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    TextView welcomeText;
     Toolbar toolbar;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
+    String currID, currName;
 
     // https://www.youtube.com/watch?v=cKUxiqNB5y0
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_room);
+        inicializarFirebase();
 
         /*ListView listView = findViewById(R.id.listView);
 
@@ -51,6 +69,7 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
         // Hocks
         drawerLayout = findViewById(R.id.drawe_layout);
         navigationView = findViewById(R.id.nav_view);
+        welcomeText  = findViewById(R.id.tvWelcome);
         toolbar = findViewById(R.id.toolbar);
 
         // Tool bar
@@ -63,6 +82,26 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Main Menu layout
+        currID = ""+ FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("user").child(currID).addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                welcomeText.setText("Welcome " + dataSnapshot.child("nombre").getValue().toString());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+
+    }
+
+    private void inicializarFirebase(){
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
 
     @Override
@@ -97,5 +136,10 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
             return true;
         }
         return false;
+    }
+
+    public void goToUploadRoom(View v){
+        Intent settingsIntent = new Intent(this, uploadRoom.class);
+        startActivity(settingsIntent);
     }
 }

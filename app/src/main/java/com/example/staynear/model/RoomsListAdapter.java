@@ -1,22 +1,16 @@
 package com.example.staynear.model;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.example.staynear.DescriptionRomm;
-import com.example.staynear.MainActivity;
 import com.example.staynear.R;
-import com.example.staynear.RoomsList;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -75,7 +69,7 @@ public class RoomsListAdapter extends ArrayAdapter<Room> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder= new ViewHolder();
-            holder.title = convertView.findViewById(R.id.textView1);
+            holder.title = convertView.findViewById(R.id.tvWelcome);
             holder.location = convertView.findViewById(R.id.textView2);
             holder.price = convertView.findViewById(R.id.textView3);
             holder.image = convertView.findViewById(R.id.image);
