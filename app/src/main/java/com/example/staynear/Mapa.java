@@ -74,7 +74,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         }).addOnFailureListener(this, new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Mapa.this,"Latitude : " + e.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(Mapa.this, e.getMessage(),Toast.LENGTH_LONG).show();
 
             }
         });
