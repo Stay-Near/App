@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -14,10 +15,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class DescriptionRomm extends AppCompatActivity {
 
     private TextView title, description, location, price, owner;
+    private ImageView photo;
     private String id,titulo;
     private DatabaseReference reff;
     private FirebaseUser currentFirebaseUser;
@@ -32,6 +35,7 @@ public class DescriptionRomm extends AppCompatActivity {
         location = findViewById(R.id.location);
         price = findViewById(R.id.precio);
         owner = findViewById(R.id.contacto);
+        photo = findViewById(R.id.imageView2);
 
         reff = FirebaseDatabase.getInstance().getReference().child("room").
                 child(getIntent().getStringExtra("id"));
@@ -45,12 +49,17 @@ public class DescriptionRomm extends AppCompatActivity {
                 String loc = dataSnapshot.child("location").getValue().toString();
                 String pre = dataSnapshot.child("price").getValue().toString();
                 String con = dataSnapshot.child("owner").getValue().toString();
+                String image = dataSnapshot.child("photo").getValue().toString();
 
                 title.setText(titulo);
                 description.setText(des);
                 location.setText(loc);
                 price.setText("$ " + pre);
                 owner.setText(con);
+
+                Picasso.get().load(image).into(photo);
+                //Picasso.with(this).load(image).into(photo);
+
             }
 
             @Override
