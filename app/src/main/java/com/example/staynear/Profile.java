@@ -89,7 +89,7 @@ public class Profile extends AppCompatActivity {
     }
 
     public void updateData() {
-        
+
     }
 
     public void changeToMainMenuActivity(View v) {
