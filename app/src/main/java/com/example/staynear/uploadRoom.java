@@ -16,8 +16,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.staynear.model.Room;
@@ -52,8 +54,9 @@ public class uploadRoom extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private Location myLoc;
 
-    private EditText title,price,location,description;
+    private EditText title,price,description;
     private Button btnUploadImage;
+    private Spinner sStates;
 
 
     @Override
@@ -62,10 +65,18 @@ public class uploadRoom extends AppCompatActivity {
         setContentView(R.layout.activity_upload_room);
         title = findViewById(R.id.tTitle);
         price = findViewById(R.id.tPrice);
-        location = findViewById(R.id.tLocation);
         description = findViewById(R.id.tDescription);
         btnUploadImage = findViewById(R.id.btnUploadImageForRoom);
         userID = ""+ FirebaseAuth.getInstance().getCurrentUser().getUid();
+        sStates = findViewById(R.id.states_spinner);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.states_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sStates.setAdapter(adapter);
+
+        Log.e("Spinner","value is " + sStates.getSelectedItem().toString());
+
         inicializarFirebase();
         inicializarLocation();
     }
@@ -131,7 +142,7 @@ public class uploadRoom extends AppCompatActivity {
                     taskUploaded.addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri linkUploadedUri) {
-                            Room room = new Room(UUID.randomUUID().toString(),title.getText().toString(),Double.parseDouble(price.getText().toString()),location.getText().toString(),description.getText().toString(), userID,linkUploadedUri.toString(),myLoc.getLatitude(),myLoc.getLongitude());
+                            Room room = new Room(UUID.randomUUID().toString(),title.getText().toString(),Double.parseDouble(price.getText().toString()),sStates.getSelectedItem().toString(),description.getText().toString(), userID,linkUploadedUri.toString(),myLoc.getLatitude(),myLoc.getLongitude());
                             databaseReference.child("room").child(room.getId()).setValue(room);
                             Toast.makeText(uploadRoom.this,"Su cuarto ha sido subido con éxito", Toast.LENGTH_LONG).show();
                         }
@@ -152,12 +163,6 @@ public class uploadRoom extends AppCompatActivity {
             Log.d("d", e.getMessage());
             Toast.makeText(this,"No se ha podido agregar el cuarto", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public void tempUpload(View v){
-        String tempPhoto = "https://firebasestorage.googleapis.com/v0/b/staynear-88b6a.appspot.com/o/roomPhotos%2F1315115215?alt=media&token=518ee16e-053f-4546-85cf-21f9d96fd1dd";
-        Room room = new Room(UUID.randomUUID().toString(),title.getText().toString(),Double.parseDouble(price.getText().toString()),location.getText().toString(),description.getText().toString(), userID,tempPhoto,0.5f,0.5f);
-        databaseReference.child("room").child(room.getId()).setValue(room);
     }
 
     public void checkPermission(){

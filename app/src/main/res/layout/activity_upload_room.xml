@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/tTitle"
         android:layout_width="221dp"
-        android:layout_height="0dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="19dp"
         android:background="@drawable/text_bt"
         android:ems="10"
@@ -25,39 +25,9 @@
         app:layout_constraintTop_toBottomOf="@+id/room" />
 
     <EditText
-        android:id="@+id/tLocation"
-        android:layout_width="217dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="56dp"
-        android:background="@drawable/text_bt"
-        android:ems="10"
-        android:hint="Location"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/tDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tPrice" />
-
-    <Button
-        android:id="@+id/bUpload"
-        android:layout_width="87dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/et_gb_black"
-        android:onClick="tempUpload"
-        android:text="Temp Upload"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bUpload4" />
-
-    <EditText
         android:id="@+id/tPrice"
         android:layout_width="218dp"
-        android:layout_height="0dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="19dp"
         android:background="@drawable/text_bt"
         android:ems="10"
@@ -66,16 +36,27 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/tLocation"
+        app:layout_constraintBottom_toTopOf="@+id/states_spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tTitle" />
 
+    <Spinner
+        android:id="@+id/states_spinner"
+        android:layout_width="218dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="18dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/tDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tPrice" />
+
     <EditText
         android:id="@+id/tDescription"
-        android:layout_width="207dp"
+        android:layout_width="218dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginBottom="12dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="  Description"
@@ -85,13 +66,13 @@
         app:layout_constraintBottom_toTopOf="@+id/btnUploadImageForRoom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/states_spinner" />
 
     <Button
         android:id="@+id/btnUploadImageForRoom"
         android:layout_width="173dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="11dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="34dp"
         android:background="@drawable/et_gb_black"
         android:onClick="selectImage"
         android:text="Seleccionar imagen"
@@ -105,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="18dp"
         android:text="Subir cuarto"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -117,12 +98,12 @@
     <Button
         android:id="@+id/bUpload4"
         android:layout_width="87dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="26dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="34dp"
         android:background="@drawable/et_gb_black"
         android:onClick="saveRoomInFirebase"
         android:text="Upload"
-        app:layout_constraintBottom_toTopOf="@+id/bUpload"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnUploadImageForRoom" />
