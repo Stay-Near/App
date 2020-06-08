@@ -134,7 +134,4 @@ public class HistoryAdapter extends ArrayAdapter<Room> {
         // END - UNIVERSAL IMAGE LOADER SETUP
     }
 
-    public void setDayScheduled(String date){
-        holder.date.setText(date);
-    }
 }

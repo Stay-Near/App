@@ -33,6 +33,7 @@ public class RoomsList extends AppCompatActivity {
     ArrayList<Room> rooms = new ArrayList<>();
     String roomID;
     private DatabaseReference roomsRef;
+    private RoomsListAdapter adapter;
    // private DatabaseReference ref;
     // https://www.youtube.com/watch?v=cKUxiqNB5y0
     @Override
@@ -43,6 +44,8 @@ public class RoomsList extends AppCompatActivity {
         //List view
         ListView lv = findViewById(R.id.listView);
         lv.setClickable(true);
+        adapter = new RoomsListAdapter(this, R.layout.adapter_view_layout,rooms);
+        lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -52,10 +55,6 @@ public class RoomsList extends AppCompatActivity {
                 //Log.i("Click", "Elemento " + position);
             }
         });
-
-        Room first = new Room(UUID.randomUUID().toString(),"Casa chida",30.00,"GLD","1 baño","1","drawable://" + R.drawable.room1,0.5f,0.5f);
-        rooms.add(first);
-        // Log.e("Añadido: ", first.toString());
 
 
         roomsRef= FirebaseDatabase.getInstance().getReference();
@@ -68,6 +67,7 @@ public class RoomsList extends AppCompatActivity {
                     //cuarto.setPhoto("drawable://" + R.drawable.room1);
                     Log.e("Cuarto obtenido: ", cuarto.toString());
                     rooms.add(cuarto);
+                    adapter.notifyDataSetChanged();
                 }
             }
 
@@ -76,8 +76,7 @@ public class RoomsList extends AppCompatActivity {
 
             }
         });
-        RoomsListAdapter adapter = new RoomsListAdapter(this, R.layout.adapter_view_layout,rooms);
-        lv.setAdapter(adapter);
+
     }
 
     private void openRoom(){

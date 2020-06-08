@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.staynear.model.Appointment;
@@ -18,6 +17,7 @@ import com.example.staynear.model.HistoryAdapter;
 import com.example.staynear.model.Room;
 import com.example.staynear.model.RoomsListAdapter;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,8 +36,8 @@ public class HistoryActivity extends AppCompatActivity {
     ArrayList<String> dates = new ArrayList<>();
     String date;
     String roomID;
-    Room cuarto;
     private DatabaseReference appointmentsRef;
+    private HistoryAdapter adapter;
     // private DatabaseReference ref;
     // https://www.youtube.com/watch?v=cKUxiqNB5y0
     @Override
@@ -45,9 +45,13 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        final String currentUser = ""+ FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         //List view
         ListView lv = findViewById(R.id.listViewHistory);
         lv.setClickable(true);
+        adapter = new HistoryAdapter(this, R.layout.history_adapter_view,rooms,dates);
+        lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -58,11 +62,6 @@ public class HistoryActivity extends AppCompatActivity {
             }
         });
 
-        Room first = new Room(UUID.randomUUID().toString(),"Casa que ya rentaste",30.00,"GLD","1 baño","1","drawable://" + R.drawable.room1,0.5f,0.5f);
-        rooms.add(first);
-        dates.add("11/07/2020");
-        // Log.e("Añadido: ", first.toString());
-
         appointmentsRef= FirebaseDatabase.getInstance().getReference();
 
         appointmentsRef.child("appointment").addValueEventListener(new ValueEventListener() {
@@ -70,38 +69,38 @@ public class HistoryActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(final DataSnapshot snapshot : dataSnapshot.getChildren()){
                     final Appointment cita = snapshot.getValue(Appointment.class);
-                    Toast.makeText(HistoryActivity.this, cita.toString(),Toast.LENGTH_SHORT).show();
                     FirebaseDatabase.getInstance().getReference().child("room").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dS) {
                             for(DataSnapshot ss : dS.getChildren()){
                                 Room room = ss.getValue(Room.class);
-                                if(room.getId().equals(cita.getRoomID())){
-                                    Toast.makeText(HistoryActivity.this, room.toString(),Toast.LENGTH_SHORT).show();
+                                if(room.getId().equals(cita.getRoomID()) && cita.getClientID().equals(currentUser)){
+                                    Log.e("Pass", "Room " + room.getId() + " in appointment " + cita.getId() + " rented room " + cita.getRoomID() + " by " + cita.getClientID() + " currently log in as " + currentUser);
                                     rooms.add(room);
-                                    dates.add("this");
+                                    dates.add(cita.getDate());
+                                    adapter.notifyDataSetChanged();
+                                    Log.e("Rooms", rooms.toString());
+                                    Log.e("Dates", dates.toString());
                                 }
-                                else{
-                                    date = "no";
-                                }
+
                             }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            Log.e("Canceled","Se cancela todo en interno");
                         }
                     });
                 }
             }
 
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.e("Canceled","Se cancela todo en externo");
             }
         });
-        /*HistoryAdapter adapter = new HistoryAdapter(this, R.layout.history_adapter_view,rooms,dates);
-        adapter.setDayScheduled("Nel");
-        lv.setAdapter(adapter);*/
+
     }
 
     private void openRoom(){
