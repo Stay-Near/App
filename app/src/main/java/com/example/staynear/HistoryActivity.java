@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.staynear.model.Appointment;
@@ -36,7 +37,7 @@ public class HistoryActivity extends AppCompatActivity {
     String date;
     String roomID;
     Room cuarto;
-    private DatabaseReference roomsRef;
+    private DatabaseReference appointmentsRef;
     // private DatabaseReference ref;
     // https://www.youtube.com/watch?v=cKUxiqNB5y0
     @Override
@@ -62,20 +63,23 @@ public class HistoryActivity extends AppCompatActivity {
         dates.add("11/07/2020");
         // Log.e("Añadido: ", first.toString());
 
-        roomsRef= FirebaseDatabase.getInstance().getReference();
+        appointmentsRef= FirebaseDatabase.getInstance().getReference();
 
-        roomsRef.child("room").addValueEventListener(new ValueEventListener() {
+        appointmentsRef.child("appointment").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    cuarto = snapshot.getValue(Room.class);
-                    /*FirebaseDatabase.getInstance().getReference().child("appointment").addValueEventListener(new ValueEventListener() {
+                for(final DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    final Appointment cita = snapshot.getValue(Appointment.class);
+                    Toast.makeText(HistoryActivity.this, cita.toString(),Toast.LENGTH_SHORT).show();
+                    FirebaseDatabase.getInstance().getReference().child("room").addValueEventListener(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for(DataSnapshot ss : dataSnapshot.getChildren()){
-                                Appointment cita = ss.getValue(Appointment.class);
-                                if(cuarto.getId().equals(cita.getRoomID())){
-                                    date = "si";
+                        public void onDataChange(@NonNull DataSnapshot dS) {
+                            for(DataSnapshot ss : dS.getChildren()){
+                                Room room = ss.getValue(Room.class);
+                                if(room.getId().equals(cita.getRoomID())){
+                                    Toast.makeText(HistoryActivity.this, room.toString(),Toast.LENGTH_SHORT).show();
+                                    rooms.add(room);
+                                    dates.add("this");
                                 }
                                 else{
                                     date = "no";
@@ -86,10 +90,7 @@ public class HistoryActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
-                    });*/
-                    Log.e("Cuarto obtenido: ", cuarto.toString());
-                    rooms.add(cuarto);
-                    dates.add("this");
+                    });
                 }
             }
 
@@ -98,9 +99,9 @@ public class HistoryActivity extends AppCompatActivity {
 
             }
         });
-        HistoryAdapter adapter = new HistoryAdapter(this, R.layout.history_adapter_view,rooms,dates);
-        //adapter.setDayScheduled("Nel");
-        lv.setAdapter(adapter);
+        /*HistoryAdapter adapter = new HistoryAdapter(this, R.layout.history_adapter_view,rooms,dates);
+        adapter.setDayScheduled("Nel");
+        lv.setAdapter(adapter);*/
     }
 
     private void openRoom(){

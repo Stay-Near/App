@@ -6,6 +6,9 @@ public class Appointment {
     private String clientID;
     private String date;
 
+    public Appointment() {
+    }
+
     public Appointment(String id, String roomID, String clientID, String date) {
         this.id = id;
         this.roomID = roomID;
