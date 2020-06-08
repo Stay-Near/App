@@ -6,4 +6,12 @@
         <item>MTY</item>
         <item>QRO</item>
     </string-array>
+
+    <string-array name="states_filter">
+        <item>All</item>
+        <item>CDMX</item>
+        <item>GDL</item>
+        <item>MTY</item>
+        <item>QRO</item>
+    </string-array>
 </resources>
