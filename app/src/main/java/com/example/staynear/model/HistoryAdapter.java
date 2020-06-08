@@ -1,6 +1,7 @@
 package com.example.staynear.model;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.staynear.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -20,31 +22,28 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.util.ArrayList;
 
-public class RoomsListAdapter extends ArrayAdapter<Room> {
-    private static final String TAG = "RoomsListAdapter";
+public class HistoryAdapter extends ArrayAdapter<Room> {
+    private static final String TAG = "HistoryAdapter";
     private Context mContext;
     private int mResource;
-    private int lastPosition = -1;
+    //ViewHolder object
+    ViewHolder holder;
+    ArrayList<String> appointments;
 
     private static class ViewHolder {
         TextView title;
         TextView location;
         TextView price;
+        TextView date;
         ImageView image;
     }
 
-    /**
-     * Default constructor for the PersonListAdapter
-     * @param context
-     * @param resource
-     * @param objects
-     */
-    public RoomsListAdapter(Context context, int resource, ArrayList<Room> objects) {
+    public HistoryAdapter(Context context, int resource, ArrayList<Room> objects,ArrayList<String> dates) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
+        this.appointments = dates;
     }
-
 
     @NonNull
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -52,26 +51,30 @@ public class RoomsListAdapter extends ArrayAdapter<Room> {
         //sets up the image loader library
         setupImageLoader();
 
-        //get the persons information
+        //get the Appointment information
+        // String currentUser = ""+ FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //String day = "placeholder";
+        String day = appointments.get(position);
         String title = getItem(position).getTitle();
         String location = getItem(position).getLocation();
         String price = "$"+getItem(position).getPrice();
         String imgUrl = getItem(position).getPhoto();
 
+        Log.e("Position","Posición : "+ position);
         //create the view result for showing the animation
         final View result;
 
-        //ViewHolder object
-        ViewHolder holder;
+
 
 
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
-            holder= new ViewHolder();
+            holder= new HistoryAdapter.ViewHolder();
             holder.title = convertView.findViewById(R.id.tvTitle);
             holder.location = convertView.findViewById(R.id.tvLocation);
             holder.price = convertView.findViewById(R.id.tvPrice);
+            holder.date = convertView.findViewById(R.id.tvDate);
             holder.image = convertView.findViewById(R.id.image);
 
             result = convertView;
@@ -79,19 +82,19 @@ public class RoomsListAdapter extends ArrayAdapter<Room> {
             convertView.setTag(holder);
         }
         else{
-            holder = (ViewHolder) convertView.getTag();
+            holder = (HistoryAdapter.ViewHolder) convertView.getTag();
             result = convertView;
         }
 
 
-       // Animation animation = AnimationUtils.loadAnimation(mContext,
+        // Animation animation = AnimationUtils.loadAnimation(mContext,
         //        (position > lastPosition) ? R.anim.load_down_anim : R.anim.load_up_anim);
         //result.startAnimation(animation);
-        lastPosition = position;
 
         holder.title.setText(title);
         holder.location.setText(location);
         holder.price.setText(price);
+        holder.date.setText(day);
 
         //create the imageloader object
         ImageLoader imageLoader = ImageLoader.getInstance();
@@ -129,5 +132,9 @@ public class RoomsListAdapter extends ArrayAdapter<Room> {
 
         ImageLoader.getInstance().init(config);
         // END - UNIVERSAL IMAGE LOADER SETUP
+    }
+
+    public void setDayScheduled(String date){
+        holder.date.setText(date);
     }
 }

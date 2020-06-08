@@ -69,7 +69,7 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
         // Hocks
         drawerLayout = findViewById(R.id.drawe_layout);
         navigationView = findViewById(R.id.nav_view);
-        welcomeText  = findViewById(R.id.tvWelcome);
+        welcomeText  = findViewById(R.id.tvTitle);
         toolbar = findViewById(R.id.toolbar);
 
         // Tool bar
@@ -141,5 +141,10 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
     public void goToUploadRoom(View v){
         Intent settingsIntent = new Intent(this, uploadRoom.class);
         startActivity(settingsIntent);
+    }
+
+    public void openHistory(View v){
+        Intent historyIntent = new Intent(this,HistoryActivity.class);
+        startActivity(historyIntent);
     }
 }
