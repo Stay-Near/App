@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity {
 
+    private String userName, mat, cor, tel;
     private TextView name, name2, matricula, matricula2, mail, telefono;
     private DatabaseReference reff, mReff;
     private FirebaseAuth fAuth;
@@ -47,8 +48,13 @@ public class Profile extends AppCompatActivity {
 
         user_id = currentUser.getUid();
 
-
         reff = FirebaseDatabase.getInstance().getReference().child("user").child(user_id);
+        mReff = FirebaseDatabase.getInstance().getReference().child("user").child(user_id);
+
+        showData();
+    }
+
+    public void showData() {
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -60,36 +66,64 @@ public class Profile extends AppCompatActivity {
                 name2.setText(nombre);
                 mail.setText(correo);
                 telefono.setText(num);
+
+                userName = nombre;
+                cor = correo;
+                tel = num;
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
-        update_data = findViewById(R.id.updateData);
-        update_data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mReff = FirebaseDatabase.getInstance().getReference().child("user").child(user_id);
-
-                String nombre = name2.getText().toString();
-                String matricula = matricula2.getText().toString();
-                String correo = mail.getText().toString();
-                String num = telefono.getText().toString();
-
-                mReff.child("user").child(user_id).child("nombre").setValue(nombre);
-                //mReff.child("user").child(user_id).child("matricula").setValue(nombre);
-                mReff.child("user").child(user_id).child("correo").setValue(correo);
-                mReff.child("user").child(user_id).child("telefono").setValue(num);
-                Toast.makeText(Profile.this, "Pulsaste boton", Toast.LENGTH_LONG).show();
-            }
-        });
-
     }
 
-    public void updateData() {
+    public void updateData(View view) {
+        if(isNameChanged()) {
+            Toast.makeText(this, "Data has been updated", Toast.LENGTH_SHORT).show();
+            showData();
+        }
+        else if(isMailChanged()) {
+            Toast.makeText(this, "Data has been updated", Toast.LENGTH_SHORT).show();
+            showData();
+        }
+        else if(isPhoneChanged()) {
+            Toast.makeText(this, "Data has been updated", Toast.LENGTH_SHORT).show();
+            showData();
+        }
+        else {
+            Toast.makeText(this, "Data is the same and can not be updated", Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    private boolean isPhoneChanged() {
+        if(!tel.equals(telefono.getText().toString())) {
+            mReff.child("telefono").setValue(telefono.getText().toString());
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    private boolean isMailChanged() {
+        if(!cor.equals(mail.getText().toString())) {
+            mReff.child("correo").setValue(mail.getText().toString());
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    private boolean isNameChanged() {
+        if(!userName.equals(name2.getText().toString())) {
+            mReff.child("nombre").setValue(name2.getText().toString());
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public void changeToMainMenuActivity(View v) {
