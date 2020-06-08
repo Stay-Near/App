@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed"
                 android:text=""
+                android:hint="Matricula"
                 android:textColor="@color/white"
                 android:includeFontPadding="false"
                 android:textSize="14sp"
@@ -50,6 +51,17 @@
                 android:layout_below="@+id/name"
                 android:layout_centerVertical="true"
                 android:layout_margin="10dp"/>
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="55dp"
+                android:layout_marginEnd="25dp"
+                android:numStars="5"
+                android:rating="0" />
 
         </RelativeLayout>
 
@@ -180,6 +192,7 @@
                     android:id="@+id/matricula2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Matricula"
                     android:drawableLeft="@drawable/ic_person_black_24dp"
                     android:drawablePadding="10dp"
                     android:text="" />
@@ -216,11 +229,22 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/updateData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Menu"
+                android:text="Actualizar"
                 android:fontFamily="sans-serif-condensed"
                 android:background="@drawable/et_gb_black"/>
+
+            <Button
+                android:id="@+id/menuPrincipal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_gb_black"
+                android:fontFamily="sans-serif-condensed"
+                android:onClick="changeToMainMenuActivity"
+                android:text="Menu Principal" />
+
         </LinearLayout>
 
     </LinearLayout>
