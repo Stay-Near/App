@@ -216,11 +216,22 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/updatedata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Menu"
+                android:background="@drawable/et_gb_black"
                 android:fontFamily="sans-serif-condensed"
-                android:background="@drawable/et_gb_black"/>
+                android:onClick="updateData"
+                android:text="Actualizar" />
+
+            <Button
+                android:id="@+id/menuprincipal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_gb_black"
+                android:fontFamily="sans-serif-condensed"
+                android:onClick="changeToMainMenuActivity"
+                android:text="Menu Principal" />
         </LinearLayout>
 
     </LinearLayout>
