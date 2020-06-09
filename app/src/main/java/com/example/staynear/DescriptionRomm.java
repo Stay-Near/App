@@ -21,7 +21,7 @@ public class DescriptionRomm extends AppCompatActivity {
 
     private TextView title, description, location, price, owner;
     private ImageView photo;
-    private String id,titulo;
+    private String id, titulo;
     private DatabaseReference reff;
     private FirebaseUser currentFirebaseUser;
 
@@ -71,8 +71,9 @@ public class DescriptionRomm extends AppCompatActivity {
 
     public void agendar(View v){
         Intent intent = new Intent(this, Schedule.class);
-        intent.putExtra("roomID",id);
-        intent.putExtra("roomTitle",titulo);
+        intent.putExtra("roomID", id);
+        intent.putExtra("roomTitle", titulo);
         startActivity(intent);
     }
+
 }

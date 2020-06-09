@@ -97,6 +97,8 @@
                         android:onClick="openHistory"
                         android:text="History" />
 
+
+
                 </LinearLayout>
 
             </LinearLayout>

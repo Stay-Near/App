@@ -35,7 +35,8 @@ public class HistoryActivity extends AppCompatActivity {
     ArrayList<Room> rooms = new ArrayList<>();
     ArrayList<String> dates = new ArrayList<>();
     String date;
-    String roomID;
+    String roomID, appoin;
+
     private DatabaseReference appointmentsRef;
     private HistoryAdapter adapter;
     // private DatabaseReference ref;
@@ -57,7 +58,7 @@ public class HistoryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 roomID =  rooms.get(position).getId();
                 Log.i("Click", "Elemento " + position + " id " + id + " room ID " + roomID);
-                openRoom();
+                openAppointment();
                 //Log.i("Click", "Elemento " + position);
             }
         });
@@ -69,6 +70,7 @@ public class HistoryActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(final DataSnapshot snapshot : dataSnapshot.getChildren()){
                     final Appointment cita = snapshot.getValue(Appointment.class);
+                    appoin = cita.getId();
                     FirebaseDatabase.getInstance().getReference().child("room").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dS) {
@@ -103,9 +105,11 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
-    private void openRoom(){
-        Intent roomIntent = new Intent(this, DescriptionRomm.class);
-        roomIntent.putExtra("id",roomID);
+    private void openAppointment(){
+        Intent roomIntent = new Intent(this, AppointmentDescription.class);
+        roomIntent.putExtra("roomID", roomID);
+        roomIntent.putExtra("idAppointment", appoin);
         startActivity(roomIntent);
+        finish();
     }
 }
