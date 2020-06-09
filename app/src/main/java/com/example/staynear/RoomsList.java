@@ -35,6 +35,7 @@ public class RoomsList extends AppCompatActivity {
     Toolbar toolbar;
     ArrayList<Room> rooms = new ArrayList<>();
     ArrayList<Room> temp = new ArrayList<>();
+    ListView lv;
     String roomID;
     private DatabaseReference roomsRef;
     private RoomsListAdapter adapter;
@@ -48,6 +49,44 @@ public class RoomsList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rooms_list);
+
+
+
+        //List view
+        lv = findViewById(R.id.listView);
+        lv.setClickable(true);
+        adapter = new RoomsListAdapter(this, R.layout.adapter_view_layout,rooms);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                roomID =  rooms.get(position).getId();
+                Log.i("Click", "Elemento " + position + " id " + id + " room ID " + roomID);
+                openRoom();
+                //Log.i("Click", "Elemento " + position);
+            }
+        });
+
+
+        roomsRef= FirebaseDatabase.getInstance().getReference();
+        roomsRef.child("room").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Room cuarto = snapshot.getValue(Room.class);
+                    //cuarto.setPhoto("drawable://" + R.drawable.room1);
+                    Log.e("Cuarto obtenido: ", cuarto.toString());
+                    rooms.add(cuarto);
+                    adapter.notifyDataSetChanged();
+                }
+                temp = rooms;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         // Spinner
         states_filter = findViewById(R.id.states_filter);
@@ -93,43 +132,6 @@ public class RoomsList extends AppCompatActivity {
             }
         });
 
-        //List view
-        ListView lv = findViewById(R.id.listView);
-        lv.setClickable(true);
-        adapter = new RoomsListAdapter(this, R.layout.adapter_view_layout,rooms);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                roomID =  rooms.get(position).getId();
-                Log.i("Click", "Elemento " + position + " id " + id + " room ID " + roomID);
-                openRoom();
-                //Log.i("Click", "Elemento " + position);
-            }
-        });
-
-
-        roomsRef= FirebaseDatabase.getInstance().getReference();
-        roomsRef.child("room").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Room cuarto = snapshot.getValue(Room.class);
-                    //cuarto.setPhoto("drawable://" + R.drawable.room1);
-                    Log.e("Cuarto obtenido: ", cuarto.toString());
-                    rooms.add(cuarto);
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        temp = rooms;
-
     }
 
     private void openRoom(){
@@ -139,28 +141,36 @@ public class RoomsList extends AppCompatActivity {
     }
 
     private void filter(){
-        int i = 0;
-        rooms = temp;
+        Log.e("Temp", temp.toString());
         ArrayList<Room> matches = new ArrayList<>();
-        if(!state_selected.equals("All")){
-            for(Room room: rooms){
-                boolean within_range = Double.compare(room.getPrice(),max_price) < 0 || Double.compare(room.getPrice(),max_price) == 0;
+        ArrayList<Room> non_matches = new ArrayList<>();
+
+        boolean within_range;
+        for(Room room: rooms){
+            within_range = Double.compare(room.getPrice(),max_price) < 0 || Double.compare(room.getPrice(),max_price) == 0;
+            if(!state_selected.equals("All")){
                 if(room.getLocation().equals(state_selected) && within_range){
-                    Log.e("Price", max_price + " vs " + room.getPrice() + " = " + within_range );
+                    Log.e("Price", max_price + " <= " + room.getPrice() + " = " + within_range );
                     matches.add(room);
                 }
-            }
-        }else{
-            for(Room room: rooms) {
-                boolean within_range = Double.compare(room.getPrice(),max_price) < 0 || Double.compare(room.getPrice(),max_price) == 0;
-                Log.e("Compare",room.getPrice() + " <= " + max_price + " ? " + within_range );
-                if (within_range) {
-                    matches.add(room);
+                else{
+                    non_matches.add(room);
                 }
-            }
+            }else {
+                    rooms = temp;
+                    Log.e("Compare", room.getPrice() + " <= " + max_price + " ? " + within_range);
+                    if (within_range) {
+                        matches.add(room);
+                    } else {
+                        non_matches.add(room);
+                    }
+
+                }
         }
-        rooms = matches;
-        Log.e("Matched", rooms.toString());
+        rooms.removeAll(non_matches);
         adapter.notifyDataSetChanged();
+        Log.e("Matched", rooms.toString());
     }
+
+
 }
