@@ -12,24 +12,24 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="73dp"
-        android:layout_marginTop="40dp"
         android:layout_marginEnd="73dp"
-        android:layout_marginBottom="31dp"
-        app:layout_constraintBottom_toBottomOf="@+id/titulo"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/titulo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contacto"
         app:srcCompat="@drawable/cuarto1" />
 
     <EditText
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
+        android:layout_marginBottom="48dp"
         android:background="@drawable/text_bt_2"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/location"
         app:layout_constraintStart_toStartOf="@+id/titulo"
         app:layout_constraintTop_toBottomOf="@+id/titulo" />
 
@@ -37,11 +37,12 @@
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginBottom="48dp"
         android:background="@drawable/text_bt_2"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/precio"
         app:layout_constraintStart_toStartOf="@+id/description"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
@@ -49,11 +50,12 @@
         android:id="@+id/precio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginBottom="64dp"
         android:background="@drawable/text_bt_2"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/bSchedule"
         app:layout_constraintStart_toStartOf="@+id/location"
         app:layout_constraintTop_toBottomOf="@+id/location" />
 
@@ -61,47 +63,41 @@
         android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="263dp"
         android:layout_marginEnd="25dp"
+        android:layout_marginBottom="42dp"
         android:background="@drawable/text_bt_2"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/description"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
         android:id="@+id/contacto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/text_bt_2"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/bFeedback"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/bSchedule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="157dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/et_gb_black"
         android:onClick="agendar"
         android:text="Book for a night"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/precio" />
 
-    <Button
-        android:id="@+id/bFeedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="4dp"
-        android:onClick="openRating"
-        android:text="Feedback"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
