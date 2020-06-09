@@ -87,6 +87,7 @@
         android:layout_marginBottom="16dp"
         android:background="#F8BF1C"
         android:text="Feedback"
+        android:onClick="menu"
         android:textAllCaps="false"
         android:textColor="#8E7324"
         android:textSize="22sp"

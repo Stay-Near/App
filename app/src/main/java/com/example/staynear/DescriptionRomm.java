@@ -75,4 +75,9 @@ public class DescriptionRomm extends AppCompatActivity {
         intent.putExtra("roomTitle",titulo);
         startActivity(intent);
     }
+
+    public void openRating(View v){
+        Intent historyIntent = new Intent(this, Rating.class);
+        startActivity(historyIntent);
+    }
 }

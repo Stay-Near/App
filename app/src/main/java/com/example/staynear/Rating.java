@@ -2,7 +2,9 @@ package com.example.staynear;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -62,5 +64,10 @@ public class Rating extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void menu(View v){
+        Intent historyIntent = new Intent(this, list_room.class);
+        startActivity(historyIntent);
     }
 }
