@@ -144,7 +144,12 @@ public class list_room extends AppCompatActivity implements NavigationView.OnNav
     }
 
     public void openHistory(View v){
-        Intent historyIntent = new Intent(this,HistoryActivity.class);
+        Intent historyIntent = new Intent(this, HistoryActivity.class);
+        startActivity(historyIntent);
+    }
+
+    public void openRating(View v){
+        Intent historyIntent = new Intent(this, Rating.class);
         startActivity(historyIntent);
     }
 }
