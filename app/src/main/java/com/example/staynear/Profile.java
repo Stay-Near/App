@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Profile extends AppCompatActivity {
 
     private String userName, mat, cor, tel;
-    private TextView name, name2, matricula, matricula2, mail, telefono;
+    private TextView name, name2, matricula, mail, telefono;
     private DatabaseReference reff, mReff;
     private FirebaseAuth fAuth;
     private FirebaseUser currentUser;
@@ -37,9 +37,8 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);;
 
         name = findViewById(R.id.name);
-        matricula = findViewById(R.id.matricula);
         name2 = (EditText) findViewById(R.id.name2);
-        matricula2 = (EditText) findViewById(R.id.matricula2);
+        matricula = (EditText) findViewById(R.id.matricula2);
         mail = (EditText) findViewById(R.id.correo);
         telefono = (EditText) findViewById(R.id.numero);
 

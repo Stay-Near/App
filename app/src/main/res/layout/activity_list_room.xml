@@ -97,13 +97,7 @@
                         android:onClick="openHistory"
                         android:text="History" />
 
-                    <Button
-                        android:id="@+id/bRating"
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_vertical|center_horizontal"
-                        android:onClick="openRating"
-                        android:text="Rating" />
+                    
 
                 </LinearLayout>
 

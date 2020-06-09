@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Appointment"></activity>
+        <activity android:name=".AppointmentDescription"></activity>
         <activity android:name=".Rating" />
         <activity android:name=".HistoryActivity" />
         <!--

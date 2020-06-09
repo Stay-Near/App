@@ -35,8 +35,8 @@ public class HistoryActivity extends AppCompatActivity {
     ArrayList<Room> rooms = new ArrayList<>();
     ArrayList<String> dates = new ArrayList<>();
     String date;
-    String roomID;
-    String appoin;
+    String roomID, appoin;
+
     private DatabaseReference appointmentsRef;
     private HistoryAdapter adapter;
     // private DatabaseReference ref;
@@ -70,7 +70,7 @@ public class HistoryActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(final DataSnapshot snapshot : dataSnapshot.getChildren()){
                     final Appointment cita = snapshot.getValue(Appointment.class);
-                    appoin = cita.getId().toString();
+                    appoin = cita.getId();
                     FirebaseDatabase.getInstance().getReference().child("room").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dS) {
@@ -106,9 +106,10 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void openAppointment(){
-        Intent roomIntent = new Intent(this, Appointment.class);
-        roomIntent.putExtra("id", roomID);
-        roomIntent.putExtra("idappointment", appoin);
+        Intent roomIntent = new Intent(this, AppointmentDescription.class);
+        roomIntent.putExtra("roomID", roomID);
+        roomIntent.putExtra("idAppointment", appoin);
         startActivity(roomIntent);
+        finish();
     }
 }
